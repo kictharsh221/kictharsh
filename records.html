@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Attendance Records</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="attendance.html">Mark Attendance</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <h2>Records</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-records">
+                    <!-- Records will be inserted here -->
+                </tbody>
+            </table>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Student Attendance System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadRecords();
+        });
+
+        function loadRecords() {
+            const records = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+            const recordsTable = document.getElementById('attendance-records');
+
+            records.forEach(record => {
+                const newRow = recordsTable.insertRow();
+
+                const nameCell = newRow.insertCell(0);
+                const dateCell = newRow.insertCell(1);
+                const statusCell = newRow.insertCell(2);
+
+                nameCell.textContent = record.studentName;
+                dateCell.textContent = record.date;
+                statusCell.textContent = record.status;
+            });
+        }
+    </script>
+</body>
+</html>
